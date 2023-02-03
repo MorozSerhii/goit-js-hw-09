@@ -1,6 +1,6 @@
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
-require('flatpickr/dist/themes/confetti.css');
+require('flatpickr/dist/themes/airbnb.css');
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { Report } from 'notiflix/build/notiflix-report-aio';
 
@@ -13,6 +13,7 @@ const inputEl = document.querySelector('input');
 
 startBtn.disabled = true;
 let selectedData = null;
+startBtn.classList.add('not-active');
 
 const options = {
   enableTime: true,
@@ -29,6 +30,7 @@ const options = {
     } else {
       Notify.success(`Let's go, press start button 😊`);
       startBtn.disabled = false;
+      startBtn.classList.remove('not-active');
     }
   },
 };
