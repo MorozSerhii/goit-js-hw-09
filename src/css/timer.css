@@ -1,0 +1,46 @@
+body{
+    background-color:  #ddd;
+    font-family: "Lato", "Microsoft JhengHei", Arial, sans-serif;
+}
+
+.timer{
+  display: flex;
+  position: absolute;
+  top: 8%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.field{
+display: flex;
+flex-direction: column-reverse;
+margin-left: 30px;
+width: 160px;
+  height: 70px;
+  background-color: #333;
+  color: #fefefe;
+  border-radius: 10px;
+}
+.value{
+  text-align: center;
+  font-size: 50px;
+  font-weight: bold;
+  animation: pop 0.3s forwards;
+}
+
+.label{
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  
+  color: #2e3130;
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0.8);
+  }
+  30% {
+    transform: scale(1.1);
+  }
+}
