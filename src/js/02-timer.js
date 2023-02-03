@@ -5,10 +5,10 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { Report } from 'notiflix/build/notiflix-report-aio';
 
 const startBtn = document.querySelector('button[data-start]');
-const TimerDaysEl = document.querySelector('span[data-days]');
-const TimerHoursEl = document.querySelector('span[data-hours]');
-const TimerMinutesEl = document.querySelector('span[data-minutes]');
-const TimerSecondsEl = document.querySelector('span[data-seconds]');
+const timerDaysEl = document.querySelector('span[data-days]');
+const timerHoursEl = document.querySelector('span[data-hours]');
+const timerMinutesEl = document.querySelector('span[data-minutes]');
+const timerSecondsEl = document.querySelector('span[data-seconds]');
 const inputEl = document.querySelector('input');
 
 startBtn.disabled = true;
@@ -52,25 +52,38 @@ function convertMs(ms) {
 }
 
 function writeInMarking({ days, hours, minutes, seconds }) {
-  TimerDaysEl.textContent = `${days}`;
-  TimerHoursEl.textContent = `${hours}`;
-  TimerMinutesEl.textContent = `${minutes}`;
-  TimerSecondsEl.textContent = `${seconds}`;
+  timerDaysEl.textContent = `${days}`;
+  timerHoursEl.textContent = `${hours}`;
+  timerMinutesEl.textContent = `${minutes}`;
+  timerSecondsEl.textContent = `${seconds}`;
 }
 
 startBtn.addEventListener('click', () => {
   startBtn.disabled = true;
+  startBtn.classList.add('not-active');
+  inputEl.classList.add('input-not-active');
+
   let intervalId = null;
   intervalId = setInterval(() => {
     let currentDate = new Date();
     let deltaTime = selectedData - currentDate;
+    let currentSeconds = currentDate.getSeconds();
     inputEl.disabled = true;
     if (deltaTime < 1000) {
       clearInterval(intervalId);
       Report.success('congratulations, time is up!');
       inputEl.disabled = false;
+      startBtn.classList.remove('not-active');
+      inputEl.classList.remove('input-not-active');
     }
     let time = convertMs(deltaTime);
+
     writeInMarking(time);
+    if (timerSecondsEl.textContent !== currentSeconds) {
+      timerSecondsEl.classList.add('pop');
+      setTimeout(() => {
+        timerSecondsEl.classList.remove('pop');
+      }, 300);
+    }
   }, 1000);
 });
