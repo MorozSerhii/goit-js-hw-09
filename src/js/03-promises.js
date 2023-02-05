@@ -30,8 +30,7 @@ function makePromise(e) {
   let step = Number(inputStepEl.value);
   let amount = Number(inputAmountEl.value);
 
-  if (!amount || !step) {
-    step = 0;
+  if (!amount) {
     amount = 1;
   }
 
